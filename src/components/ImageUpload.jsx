@@ -4,6 +4,8 @@ import './ImageUpload.css';
 function ImageUpload() {
   const [selectedImage, setSelectedImage] = useState(null);
   const [previewUrl, setPreviewUrl] = useState(null);
+  const [uploading, setUploading] = useState(false);
+  const [uploadStatus, setUploadStatus] = useState(null); // 'success' or 'error'
 
   const handleImageChange = (event) => {
     const file = event.target.files[0];
@@ -22,6 +24,38 @@ function ImageUpload() {
   const handleClearImage = () => {
     setSelectedImage(null);
     setPreviewUrl(null);
+    setUploadStatus(null);
+  };
+
+  const handleUploadToServer = async () => {
+    if (!selectedImage) return;
+
+    setUploading(true);
+    setUploadStatus(null);
+
+    try {
+      // Placeholder: Simulate server upload
+      const formData = new FormData();
+      formData.append('image', selectedImage);
+
+      // Simulating API call with timeout
+      await new Promise((resolve) => setTimeout(resolve, 2000));
+
+      // TODO: Replace with actual server endpoint
+      // const response = await fetch('YOUR_API_ENDPOINT', {
+      //   method: 'POST',
+      //   body: formData,
+      // });
+      // const data = await response.json();
+
+      console.log('Image would be uploaded:', selectedImage.name);
+      setUploadStatus('success');
+    } catch (error) {
+      console.error('Upload error:', error);
+      setUploadStatus('error');
+    } finally {
+      setUploading(false);
+    }
   };
 
   return (
@@ -69,9 +103,30 @@ function ImageUpload() {
                 {(selectedImage?.size / 1024).toFixed(2)} KB
               </p>
             </div>
-            <button onClick={handleClearImage} className="clear-button">
-              Clear Image
-            </button>
+
+            {uploadStatus === 'success' && (
+              <div className="status-message success">
+                ✓ Image uploaded successfully!
+              </div>
+            )}
+            {uploadStatus === 'error' && (
+              <div className="status-message error">
+                ✗ Upload failed. Please try again.
+              </div>
+            )}
+
+            <div className="button-group">
+              <button
+                onClick={handleUploadToServer}
+                className="upload-button"
+                disabled={uploading || uploadStatus === 'success'}
+              >
+                {uploading ? 'Uploading...' : uploadStatus === 'success' ? 'Uploaded' : 'Upload to Server'}
+              </button>
+              <button onClick={handleClearImage} className="clear-button">
+                Clear Image
+              </button>
+            </div>
           </div>
         )}
       </div>

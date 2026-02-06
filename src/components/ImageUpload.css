@@ -108,6 +108,38 @@ h1 {
   margin: 0;
 }
 
+.button-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  width: 100%;
+  max-width: 400px;
+}
+
+.upload-button {
+  padding: 0.8em 2em;
+  font-size: 1em;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  background-color: #646cff;
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: 600;
+}
+
+.upload-button:hover:not(:disabled) {
+  background-color: #535bf2;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(100, 108, 255, 0.3);
+}
+
+.upload-button:disabled {
+  background-color: #888;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
 .clear-button {
   padding: 0.8em 2em;
   font-size: 1em;
@@ -126,6 +158,28 @@ h1 {
   box-shadow: 0 4px 8px rgba(255, 68, 68, 0.3);
 }
 
+.status-message {
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  font-weight: 500;
+  text-align: center;
+  margin: 0.5rem 0;
+  max-width: 400px;
+  width: 100%;
+}
+
+.status-message.success {
+  background-color: rgba(34, 197, 94, 0.1);
+  color: #22c55e;
+  border: 1px solid rgba(34, 197, 94, 0.3);
+}
+
+.status-message.error {
+  background-color: rgba(239, 68, 68, 0.1);
+  color: #ef4444;
+  border: 1px solid rgba(239, 68, 68, 0.3);
+}
+
 /* Responsive design */
 @media (max-width: 768px) {
   .image-upload-container {
@@ -135,6 +189,10 @@ h1 {
 
   h1 {
     font-size: 2em;
+  }
+
+  .button-group {
+    max-width: 100%;
   }
 
   .upload-box {
@@ -200,6 +258,20 @@ h1 {
     font-size: 0.85em;
   }
 
+
+  .upload-button {
+    padding: 0.75em 1.5em;
+    font-size: 0.95em;
+  }
+
+  .button-group {
+    gap: 0.5rem;
+  }
+
+  .status-message {
+    font-size: 0.9em;
+    padding: 0.6rem 0.8rem;
+  }
   .clear-button {
     padding: 0.75em 1.5em;
     font-size: 0.95em;
